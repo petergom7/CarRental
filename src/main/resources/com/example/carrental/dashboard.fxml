@@ -84,8 +84,6 @@
                             </HBox>
                         </VBox>
 
-                        <Separator />
-
                         <VBox spacing="8.0" />
 
                         <Separator />
