@@ -7,4 +7,6 @@ module com.example.carrental {
     exports com.example.carrental;
 
     // this is a comment
+    // added one
+
 }
