@@ -5,4 +5,6 @@ module com.example.carrental {
 
     opens com.example.carrental to javafx.fxml;
     exports com.example.carrental;
+
+    // this is a comment
 }
