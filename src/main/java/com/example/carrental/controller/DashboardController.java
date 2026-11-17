@@ -9,14 +9,13 @@ import java.util.List;
 public class DashboardController {
 
     @FXML
-    private Label selectedCarNameLabel; // Link these to your FXML details panel labels if needed
+    private Label selectedCarNameLabel;
 
     private RentalService rentalService = new RentalService();
 
     @FXML
     public void initialize() {
         List<Car> cars = rentalService.getAvailableCars();
-        // You can populate your UI cards dynamically here or bind them to your FXML elements
     }
 
     @FXML
