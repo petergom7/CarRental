@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -91,6 +91,7 @@
                     </HBox>
 
                     <StackPane prefHeight="150.0" style="-fx-background-color: #f5f2eb; -fx-background-radius: 12;">
+                        <ImageView fx:id="detailImage" fitHeight="140.0" fitWidth="240.0" preserveRatio="true" />
                         <Label fx:id="detailEmoji" style="-fx-font-size: 64px;" />
                     </StackPane>
 

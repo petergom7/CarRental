@@ -2,12 +2,23 @@ package com.example.carrental.util;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.image.Image;
 
+import java.io.InputStream;
 import java.util.Locale;
 
-/** Small UI helpers: alerts, peso formatting, friendly number parsing. */
+/** Small UI helpers: alerts, peso formatting, friendly number parsing, car images. */
 public final class UiUtil {
     private UiUtil() {}
+
+    public static Image loadCarImage(String carName) {
+        String slug = carName.toLowerCase().replaceAll("[^a-z0-9]+", "-").replaceAll("^-|-$", "");
+        for (String ext : new String[]{"png", "jpg", "jpeg"}) {
+            InputStream in = UiUtil.class.getResourceAsStream("/com/example/carrental/images/" + slug + "." + ext);
+            if (in != null) return new Image(in);
+        }
+        return null;
+    }
 
     public static String peso(double amount) {
         if (amount == Math.rint(amount)) return String.format(Locale.US, "₱%,.0f", amount);

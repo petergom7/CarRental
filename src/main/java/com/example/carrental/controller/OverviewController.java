@@ -1,5 +1,8 @@
 package com.example.carrental.controller;
 
+
+import javafx.fxml.FXMLLoader;
+import java.io.IOException;
 import com.example.carrental.model.Car;
 import com.example.carrental.model.Rental;
 import com.example.carrental.model.Vehicle;
@@ -33,6 +36,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 public class OverviewController {
 
@@ -55,6 +61,7 @@ public class OverviewController {
     @FXML private Label detailPlaceholder;
     @FXML private VBox detailContent;
     @FXML private Label detailEmoji;
+    @FXML private ImageView detailImage;
     @FXML private Label detailName;
     @FXML private Label detailPrice;
     @FXML private Label detailPriceUnit;
@@ -221,11 +228,21 @@ public class OverviewController {
         HBox top = new HBox(new VBox(name, rating), spacer(), heart);
         top.setAlignment(Pos.CENTER_LEFT);
 
-        Label emoji = new Label(emojiFor(v));
-        emoji.setStyle("-fx-font-size: 48px;");
-        StackPane image = new StackPane(emoji);
+        StackPane image = new StackPane();
         image.setPrefHeight(100);
         image.setStyle("-fx-background-color: #f5f2eb; -fx-background-radius: 12;");
+        Image pic = UiUtil.loadCarImage(v.getName());
+        if (pic != null) {
+            ImageView iv = new ImageView(pic);
+            iv.setFitHeight(100);
+            iv.setFitWidth(260);
+            iv.setPreserveRatio(true);
+            image.getChildren().add(iv);
+        } else {
+            Label emoji = new Label(emojiFor(v));
+            emoji.setStyle("-fx-font-size: 48px;");
+            image.getChildren().add(emoji);
+        }
 
         Label power = new Label("🐎 " + v.getHorsepower());
         power.setStyle("-fx-font-size: 10px; -fx-text-fill: #666;");
@@ -245,12 +262,12 @@ public class OverviewController {
         });
         return card;
     }
-
     private Pane spacer() {
         Pane p = new Pane();
         HBox.setHgrow(p, javafx.scene.layout.Priority.ALWAYS);
         return p;
     }
+
 
     // ------------------------------------------------------------------ details panel
     private void showDetails(Vehicle v) {
@@ -260,6 +277,13 @@ public class OverviewController {
         detailPlaceholder.setVisible(!has);
         detailPlaceholder.setManaged(!has);
         if (!has) return;
+
+        Image pic = UiUtil.loadCarImage(v.getName());
+        detailImage.setImage(pic);
+        detailImage.setVisible(pic != null);
+        detailImage.setManaged(pic != null);
+        detailEmoji.setVisible(pic == null);
+        detailEmoji.setManaged(pic == null);
 
         detailEmoji.setText(emojiFor(v));
         detailName.setText(v.getName());
