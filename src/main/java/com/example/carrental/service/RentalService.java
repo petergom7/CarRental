@@ -258,6 +258,8 @@ public class RentalService {
     }
 
     private void seedVehicles() {
+        vehicles.add(VehicleFactory.create("Luxury", "BMW M5 Touring", "Bmw", "Automatic", 38400, 4.9, 27, "727 hp", "9 km/L"));
+        vehicles.add(VehicleFactory.create("Luxury", "Lexus LC 500 ", "Toyota", "Automatic", 34600, 5.0, 45, "471  hp", "8.62 km/L"));
         vehicles.add(VehicleFactory.create("Sedan", "Toyota Vios 1.3 XLE", "Toyota", "Automatic", 1800, 4.9, 167, "98 hp", "17 km/L"));
         vehicles.add(VehicleFactory.create("Sedan", "Honda City", "Honda", "Automatic", 1950, 5.0, 93, "121 hp", "16 km/L"));
         vehicles.add(VehicleFactory.create("Sedan", "Mitsubishi Mirage G4", "Mitsubishi", "Manual", 1600, 4.7, 133, "78 hp", "20 km/L"));

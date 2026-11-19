@@ -22,10 +22,7 @@ public final class VehicleFactory {
             case "Pickup":     return new Pickup(name, brand, transmission, dailyRate, rating, reviewCount, horsepower, fuelEconomy);
             case "Luxury":     return new LuxuryCar(name, brand, transmission, dailyRate, rating, reviewCount, horsepower, fuelEconomy);
             case "Van":        return new Van(name, brand, transmission, dailyRate, rating, reviewCount, horsepower, fuelEconomy);
-<<<<<<< HEAD
-=======
 
->>>>>>> 5ec3a549beb86064a44c0485708e23f68a3df8b8
             default: throw new IllegalArgumentException("Unknown vehicle type: " + type);
         }
     }
