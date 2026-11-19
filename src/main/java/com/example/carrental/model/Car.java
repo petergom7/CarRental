@@ -1,38 +1,15 @@
 package com.example.carrental.model;
 
-public class Car {
-    private String name;
-    private String brand;
-    private String type;
-    private String rentalType;
-    private double pricePerHour;
-    private double rating;
-    private int reviewCount;
-    private String transmission;
-    private String horsepower;
-    private String fuelEconomy;
-
-    public Car(String name, String brand, String type, String rentalType, double pricePerHour, double rating, int reviewCount, String transmission, String horsepower, String fuelEconomy) {
-        this.name = name;
-        this.brand = brand;
-        this.type = type;
-        this.rentalType = rentalType;
-        this.pricePerHour = pricePerHour;
-        this.rating = rating;
-        this.reviewCount = reviewCount;
-        this.transmission = transmission;
-        this.horsepower = horsepower;
-        this.fuelEconomy = fuelEconomy;
+/**
+ * ABSTRACTION + INHERITANCE (level 2): groups the passenger cars (Sedan, SUV, Hatchback,
+ * Pickup, LuxuryCar). Vans and motorcycles extend Vehicle directly.
+ * Hierarchy: Vehicle -> Car -> Sedan (3 levels).
+ */
+public abstract class Car extends Vehicle {
+    protected Car(String name, String brand, String transmission, double dailyRate,
+                  double rating, int reviewCount, String horsepower, String fuelEconomy) {
+        super(name, brand, transmission, dailyRate, rating, reviewCount, horsepower, fuelEconomy);
     }
 
-    public String getName() { return name; }
-    public String getBrand() { return brand; }
-    public String getType() { return type; }
-    public String getRentalType() { return rentalType; }
-    public double getPricePerHour() { return pricePerHour; }
-    public double getRating() { return rating; }
-    public int getReviewCount() { return reviewCount; }
-    public String getTransmission() { return transmission; }
-    public String getHorsepower() { return horsepower; }
-    public String getFuelEconomy() { return fuelEconomy; }
+    public abstract int getDoors();
 }

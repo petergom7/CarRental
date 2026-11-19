@@ -2,11 +2,10 @@ module com.example.carrental {
     requires javafx.controls;
     requires javafx.fxml;
 
-
     opens com.example.carrental to javafx.fxml;
-    exports com.example.carrental;
+    opens com.example.carrental.controller to javafx.fxml;
 
-    // this is a comment
-    // added one
-// boiiiii
+    exports com.example.carrental;
+    exports com.example.carrental.model;
+    exports com.example.carrental.service;
 }
