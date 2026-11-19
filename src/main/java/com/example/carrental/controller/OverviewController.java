@@ -217,7 +217,7 @@ public class OverviewController {
         Label rating = new Label(String.format("⭐ %.1f (%d)", v.getRating(), v.getReviewCount()));
         rating.setStyle("-fx-font-size: 11px; -fx-text-fill: #e6a800;");
 
-        Label heart = new Label(v.isFavorite() ? "❤️" : "🤍");
+        Label heart = new Label(v.isFavorite() ? "❤" : "♡");
         heart.setStyle("-fx-font-size: 16px; -fx-cursor: hand;");
         heart.setOnMouseClicked(e -> {
             service.setFavorite(v, !v.isFavorite());
