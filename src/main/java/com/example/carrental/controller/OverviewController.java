@@ -197,7 +197,6 @@ public class OverviewController {
 
     private String emojiFor(Vehicle v) {
         switch (v.getType()) {
-            case "Motorcycle": return "🏍";
             case "Van": return "🚐";
             case "Pickup": return "🛻";
             default: return "🚗";

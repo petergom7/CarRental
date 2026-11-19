@@ -265,6 +265,5 @@ public class RentalService {
         vehicles.add(VehicleFactory.create("Hatchback", "Suzuki Swift", "Suzuki", "Automatic", 1700, 4.6, 58, "82 hp", "21 km/L"));
         vehicles.add(VehicleFactory.create("Pickup", "Toyota Hilux", "Toyota", "Manual", 3200, 4.8, 76, "148 hp", "12 km/L"));
         vehicles.add(VehicleFactory.create("Van", "Nissan Urvan", "Nissan", "Manual", 3000, 4.5, 41, "129 hp", "10 km/L"));
-        vehicles.add(VehicleFactory.create("Motorcycle", "Suzuki Gixxer SF 250", "Suzuki", "Manual", 900, 4.7, 66, "26 hp", "33 km/L"));
     }
 }
