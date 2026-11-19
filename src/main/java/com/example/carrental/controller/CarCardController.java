@@ -16,7 +16,7 @@ public class CarCardController {
     public void setData(Vehicle v, String priceText, String emoji, boolean selected,
                         Runnable onSelect, Runnable onHeart) {
         nameLabel.setText(v.getName());
-        ratingLabel.setText(String.format("⭐ %.1f (%d)", v.getRating(), v.getReviewCount()));
+        ratingLabel.setText(String.format("⭐%.1f (%d)", v.getRating(), v.getReviewCount()));
         heartLabel.setText(v.isFavorite() ? "❤️" : "🤍");
         powerLabel.setText("🐎 " + v.getHorsepower());
         fuelLabel.setText("⛽ " + v.getFuelEconomy());
