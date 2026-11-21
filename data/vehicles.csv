@@ -1,6 +1,6 @@
 Luxury|BMW M5 Touring|Bmw|Automatic|38400.0|4.9|27|727 hp|9 km/L|true|false
 Luxury|Lexus LC 500|Toyota|Automatic|34600.0|5.0|45|471  hp|8.62 km/L|true|false
-Sedan|Toyota Vios 1.3 XLE|Toyota|Automatic|1800.0|4.9|167|98 hp|17 km/L|true|false
+Sedan|Toyota Vios 1.3 XLE|Toyota|Automatic|1800.0|4.9|167|98 hp|17 km/L|false|false
 Sedan|Honda City|Honda|Automatic|1950.0|5.0|93|121 hp|16 km/L|true|false
 Sedan|Mitsubishi Mirage G4|Mitsubishi|Manual|1600.0|4.7|133|78 hp|20 km/L|true|false
 SUV|Mitsubishi Xpander|Mitsubishi|Automatic|2500.0|5.0|134|104 hp|14 km/L|true|false
