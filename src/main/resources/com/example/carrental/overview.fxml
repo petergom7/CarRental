@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 
 <ScrollPane fitToWidth="true" maxHeight="Infinity" maxWidth="Infinity" style="-fx-background: #f5f2eb; -fx-background-color: #f5f2eb; -fx-border-color: transparent;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.carrental.controller.OverviewController">
-    <VBox spacing="20.0">
+    <VBox prefHeight="362.0" prefWidth="1410.0" spacing="20.0">
         <padding>
             <Insets bottom="20.0" left="25.0" right="25.0" top="10.0" />
         </padding>
