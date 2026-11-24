@@ -83,9 +83,11 @@ public class SignInController {
 
             Stage stage = (Stage) usernameField.getScene().getWindow();
             stage.setTitle(title);
+            stage.setScene(scene);
             stage.setMinWidth(1100);
             stage.setMinHeight(650);
-            stage.setScene(scene);
+            stage.setWidth(1280);
+            stage.setHeight(768);
             stage.centerOnScreen();
         } catch (IOException e) {
             UiUtil.showError("Unable to open dashboard: " + e.getMessage());
