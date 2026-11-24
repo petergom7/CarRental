@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane fx:controller="com.example.carrental.controller.CustomerDashboardController"
+            prefHeight="768.0" prefWidth="1280.0" style="-fx-background-color: #f5f2eb;"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-padding: 15 25; -fx-background-color: #f5f2eb;">
+            <Label style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #111111;" text="CarviaRental" />
+
+            <HBox alignment="CENTER" spacing="5.0" style="-fx-background-color: #eae5dc; -fx-background-radius: 20; -fx-padding: 4;">
+                <Button fx:id="navOverview" onAction="#handleShowOverview" text="🏠 Overview" />
+                <Button fx:id="navRentedCars" onAction="#handleShowRentedCars" text="📋 Rented Cars" />
+            </HBox>
+        </HBox>
+    </top>
+    <center>
+        <StackPane>
+            <fx:include fx:id="overview" source="overview.fxml" />
+            <fx:include fx:id="rentedCars" source="customer_rentals.fxml" />
+        </StackPane>
+    </center>
+</BorderPane>

@@ -10,11 +10,10 @@ import java.io.IOException;
 public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/carrental/dashboard.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 768);
-        stage.setTitle("CarViaRental Dashboard");
-        stage.setMinWidth(1100);
-        stage.setMinHeight(650);
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/com/example/carrental/sign_in.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 420);
+        stage.setTitle("CarViaRental Sign In");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

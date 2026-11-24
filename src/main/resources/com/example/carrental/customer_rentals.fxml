@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="Infinity" maxWidth="Infinity" spacing="12.0" style="-fx-background-color: #f5f2eb;"
+      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.carrental.controller.CustomerRentalsController">
+    <padding>
+        <Insets bottom="20.0" left="25.0" right="25.0" top="10.0" />
+    </padding>
+
+    <HBox alignment="CENTER_LEFT" spacing="15.0">
+        <VBox spacing="3.0">
+            <Label style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #111111;" text="Rented Cars" />
+            <Label fx:id="summaryLabel" style="-fx-font-size: 13px; -fx-text-fill: #777777;" />
+        </VBox>
+    </HBox>
+
+    <TableView fx:id="rentedTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colId" maxWidth="60.0" text="#" />
+            <TableColumn fx:id="colVehicle" text="Vehicle" />
+            <TableColumn fx:id="colPlan" text="Plan" />
+            <TableColumn fx:id="colStart" text="Start" />
+            <TableColumn fx:id="colEnd" text="Return by" />
+            <TableColumn fx:id="colDuration" text="Duration" />
+            <TableColumn fx:id="colTotal" text="Total" />
+            <TableColumn fx:id="colStatus" text="Status" />
+        </columns>
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
+    </TableView>
+</VBox>

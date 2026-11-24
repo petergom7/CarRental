@@ -4,34 +4,51 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="420.0" prefWidth="600.0" style="-fx-background-color: #f5f2eb;"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.carrental.controller.SignInController">
    <children>
-      <PasswordField layoutX="226.0" layoutY="188.0" />
-      <TextField layoutX="226.0" layoutY="143.0" />
+      <Label layoutX="119.0" layoutY="30.0" prefHeight="45.0" prefWidth="360.0" text="Welcome to CarVia Rentals">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Label layoutX="245.0" layoutY="95.0" text="Please Sign in">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+
       <Label layoutX="162.0" layoutY="147.0" text="Username">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
+      <TextField fx:id="usernameField" layoutX="226.0" layoutY="143.0" prefWidth="200.0" promptText="Enter username" />
+
       <Label layoutX="162.0" layoutY="192.0" prefHeight="17.0" prefWidth="67.0" text="Password">
          <font>
             <Font name="Arial Bold" size="12.0" />
          </font>
       </Label>
-      <RadioButton layoutX="226.0" layoutY="259.0" mnemonicParsing="false" text="Customer" />
-      <RadioButton layoutX="319.0" layoutY="259.0" mnemonicParsing="false" text="Admin" />
-      <Label layoutX="119.0" layoutY="33.0" prefHeight="45.0" prefWidth="360.0" text="Welcome to CarVia Rentals">
-         <font>
-            <Font size="30.0" />
-         </font></Label>
-      <Label layoutX="238.0" layoutY="101.0" text="Please Sign in">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="234.0" layoutY="225.0" prefHeight="26.0" prefWidth="149.0" text="Choose User Type">
+      <PasswordField fx:id="passwordField" layoutX="226.0" layoutY="188.0" prefWidth="200.0" promptText="Enter password" />
+
+      <Label layoutX="234.0" layoutY="228.0" prefHeight="26.0" prefWidth="149.0" text="Choose User Type">
          <font>
             <Font size="17.0" />
-         </font></Label>
+         </font>
+      </Label>
+      <RadioButton fx:id="customerRadio" layoutX="226.0" layoutY="262.0" mnemonicParsing="false" selected="true" text="Customer">
+         <toggleGroup>
+            <ToggleGroup fx:id="userTypeGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="adminRadio" layoutX="325.0" layoutY="262.0" mnemonicParsing="false" text="Admin" toggleGroup="$userTypeGroup" />
+
+      <Button fx:id="signInButton" layoutX="255.0" layoutY="308.0" onAction="#handleSignIn"
+              prefHeight="36.0" prefWidth="110.0"
+              style="-fx-background-color: #111111; -fx-text-fill: white; -fx-background-radius: 10; -fx-cursor: hand;"
+              text="Sign In" />
    </children>
 </AnchorPane>
