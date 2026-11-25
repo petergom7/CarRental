@@ -10,7 +10,6 @@ public abstract class Vehicle {
     private String horsepower;
     private String fuelEconomy;
     private boolean available = true;
-    private boolean favorite;
 
     protected Vehicle(String name, String brand, String transmission, double dailyRate,
                       double rating, int reviewCount, String horsepower, String fuelEconomy) {
@@ -41,7 +40,7 @@ public abstract class Vehicle {
     public String getHorsepower() { return horsepower; }
     public String getFuelEconomy() { return fuelEconomy; }
     public boolean isAvailable() { return available; }
-    public boolean isFavorite() { return favorite; }
+
 
     public void setName(String name) { this.name = Check.text(name, "Vehicle name"); }
     public void setBrand(String brand) { this.brand = Check.text(brand, "Brand"); }
@@ -73,7 +72,6 @@ public abstract class Vehicle {
     public void setHorsepower(String horsepower) { this.horsepower = Check.optionalText(horsepower, "N/A", "Horsepower"); }
     public void setFuelEconomy(String fuelEconomy) { this.fuelEconomy = Check.optionalText(fuelEconomy, "N/A", "Fuel economy"); }
     public void setAvailable(boolean available) { this.available = available; }
-    public void setFavorite(boolean favorite) { this.favorite = favorite; }
 
     @Override
     public String toString() {

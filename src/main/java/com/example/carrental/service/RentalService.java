@@ -106,10 +106,6 @@ public class RentalService {
         notifyChanges();
     }
 
-    public void setFavorite(Vehicle v, boolean favorite) {
-        v.setFavorite(favorite);
-        notifyChanges();
-    }
 
     private void checkDuplicateName(String name, Vehicle ignore) {
         for (Vehicle other : vehicles) {
@@ -187,8 +183,7 @@ public class RentalService {
             for (Vehicle v : vehicles) {
                 vLines.add(String.join("|", v.getType(), v.getName(), v.getBrand(), v.getTransmission(),
                         String.valueOf(v.getDailyRate()), String.valueOf(v.getRating()),
-                        String.valueOf(v.getReviewCount()), v.getHorsepower(), v.getFuelEconomy(),
-                        String.valueOf(v.isAvailable()), String.valueOf(v.isFavorite())));
+                        String.valueOf(v.getReviewCount()), v.getHorsepower(), v.getFuelEconomy()));
             }
             Files.write(VEHICLE_FILE, vLines);
 
@@ -213,7 +208,6 @@ public class RentalService {
                 Vehicle v = VehicleFactory.create(p[0], p[1], p[2], p[3], Double.parseDouble(p[4]),
                         Double.parseDouble(p[5]), Integer.parseInt(p[6]), p[7], p[8]);
                 v.setAvailable(Boolean.parseBoolean(p[9]));
-                v.setFavorite(Boolean.parseBoolean(p[10]));
                 vehicles.add(v);
             }
             if (Files.exists(RENTAL_FILE)) {
