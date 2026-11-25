@@ -11,13 +11,11 @@ import javafx.scene.control.Label;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-/** The shell: top bar, clock, and switching between the three pages. */
 public class DashboardController {
 
     private static final String NAV_ON = "-fx-background-color: #111111; -fx-text-fill: white; -fx-background-radius: 15; -fx-cursor: hand;";
     private static final String NAV_OFF = "-fx-background-color: transparent; -fx-text-fill: #333333; -fx-background-radius: 15; -fx-cursor: hand;";
 
-    // These two-name pairs come from <fx:include fx:id="overview" ...> in dashboard.fxml
     @FXML private Node overview;
     @FXML private Node vehicles;
     @FXML private Node rentals;

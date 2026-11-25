@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 
 import java.math.BigDecimal;
 
-/** CRUD screen for vehicles. All real work is delegated to RentalService. */
 public class VehicleController {
 
     @FXML private TableView<Vehicle> vehicleTable;
@@ -58,6 +57,7 @@ public class VehicleController {
     private void refresh() {
         Vehicle selected = vehicleTable.getSelectionModel().getSelectedItem();
         vehicleTable.setItems(FXCollections.observableArrayList(service.getAllVehicles()));
+        vehicleTable.refresh();
         if (selected != null && vehicleTable.getItems().contains(selected)) {
             vehicleTable.getSelectionModel().select(selected);
         }

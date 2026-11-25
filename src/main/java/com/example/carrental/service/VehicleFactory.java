@@ -4,7 +4,6 @@ import com.example.carrental.model.*;
 
 import java.util.List;
 
-/** Builds the right Vehicle subclass from the type chosen in the UI. */
 public final class VehicleFactory {
     public static final List<String> TYPES =
             List.of("Sedan", "SUV", "Hatchback", "Pickup", "Luxury", "Van");

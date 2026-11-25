@@ -1,8 +1,5 @@
 package com.example.carrental.controller;
 
-
-import javafx.fxml.FXMLLoader;
-import java.io.IOException;
 import com.example.carrental.model.Car;
 import com.example.carrental.model.Rental;
 import com.example.carrental.model.Vehicle;
@@ -14,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -23,6 +21,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -36,9 +36,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 
 public class OverviewController {
 
@@ -90,11 +87,10 @@ public class OverviewController {
 
         searchField.textProperty().addListener((obs, oldV, newV) -> applyFilters());
         sortBox.valueProperty().addListener((obs, oldV, newV) -> applyFilters());
-        service.addListener(this::refresh);   // refresh whenever another screen changes the data
+        service.addListener(this::refresh);
         refresh();
     }
 
-    // ------------------------------------------------------------------ refresh / filters
     private void refresh() {
         rebuildBrandFilters();
         applyFilters();
@@ -105,14 +101,17 @@ public class OverviewController {
 
     private void rebuildBrandFilters() {
         Set<String> brands = new TreeSet<>();
-        for (Vehicle v : service.getAllVehicles()) brands.add(v.getBrand());
+        for (Vehicle v : service.getAllVehicles()) {
+            brands.add(v.getBrand());
+        }
         selectedBrands.retainAll(brands);
         brandFilters.getChildren().clear();
         for (String brand : brands) {
             CheckBox cb = new CheckBox(brand);
             cb.setSelected(selectedBrands.contains(brand));
             cb.setOnAction(e -> {
-                if (cb.isSelected()) selectedBrands.add(brand); else selectedBrands.remove(brand);
+                if (cb.isSelected()) selectedBrands.add(brand);
+                else selectedBrands.remove(brand);
                 applyFilters();
             });
             brandFilters.getChildren().add(cb);
@@ -123,7 +122,8 @@ public class OverviewController {
         for (String type : VehicleFactory.TYPES) {
             CheckBox cb = new CheckBox(type);
             cb.setOnAction(e -> {
-                if (cb.isSelected()) selectedTypes.add(type); else selectedTypes.remove(type);
+                if (cb.isSelected()) selectedTypes.add(type);
+                else selectedTypes.remove(type);
                 applyFilters();
             });
             typeFilters.getChildren().add(cb);
@@ -134,10 +134,14 @@ public class OverviewController {
         List<Vehicle> list = service.search(searchField.getText(), selectedBrands, selectedTypes, true);
         list.sort(currentComparator());
 
-        if (selectedVehicle != null && !selectedVehicle.isAvailable()) selectedVehicle = null;
+        if (selectedVehicle != null && !selectedVehicle.isAvailable()) {
+            selectedVehicle = null;
+        }
 
         carGrid.getChildren().clear();
-        for (Vehicle v : list) carGrid.getChildren().add(buildCard(v));
+        for (Vehicle v : list) {
+            carGrid.getChildren().add(buildCard(v));
+        }
         if (list.isEmpty()) {
             Label empty = new Label("No available cars match your filters.");
             empty.setStyle("-fx-text-fill: #888888;");
@@ -159,14 +163,15 @@ public class OverviewController {
     private void handleResetFilters() {
         selectedBrands.clear();
         selectedTypes.clear();
-        for (javafx.scene.Node n : typeFilters.getChildren()) ((CheckBox) n).setSelected(false);
+        for (Node n : typeFilters.getChildren()) {
+            ((CheckBox) n).setSelected(false);
+        }
         searchField.clear();
         sortBox.setValue("Name (A-Z)");
         selectedPlan = "Daily";
         stylePlanButtonsAndRefresh();
     }
 
-    // ------------------------------------------------------------------ rental plan buttons
     @FXML private void handleDaily() { setPlan("Daily"); }
     @FXML private void handleWeekly() { setPlan("Weekly"); }
     @FXML private void handleMonthly() { setPlan("Monthly"); }
@@ -203,7 +208,6 @@ public class OverviewController {
         }
     }
 
-    // ------------------------------------------------------------------ car cards
     private VBox buildCard(Vehicle v) {
         String base = "-fx-background-color: white; -fx-background-radius: 16; -fx-padding: 15; -fx-cursor: hand;";
         String selected = "-fx-border-color: #111111; -fx-border-width: 2; -fx-border-radius: 16;";
@@ -217,14 +221,7 @@ public class OverviewController {
         Label rating = new Label(String.format("⭐ %.1f (%d)", v.getRating(), v.getReviewCount()));
         rating.setStyle("-fx-font-size: 11px; -fx-text-fill: #e6a800;");
 
-        Label heart = new Label(v.isFavorite() ? "❤" : "♡");
-        heart.setStyle("-fx-font-size: 16px; -fx-cursor: hand;");
-        heart.setOnMouseClicked(e -> {
-            service.setFavorite(v, !v.isFavorite());
-            e.consume();
-        });
-
-        HBox top = new HBox(new VBox(name, rating), spacer(), heart);
+        HBox top = new HBox(new VBox(name, rating));
         top.setAlignment(Pos.CENTER_LEFT);
 
         StackPane image = new StackPane();
@@ -261,14 +258,13 @@ public class OverviewController {
         });
         return card;
     }
+
     private Pane spacer() {
         Pane p = new Pane();
         HBox.setHgrow(p, javafx.scene.layout.Priority.ALWAYS);
         return p;
     }
 
-
-    // ------------------------------------------------------------------ details panel
     private void showDetails(Vehicle v) {
         boolean has = v != null;
         detailContent.setVisible(has);
@@ -294,7 +290,7 @@ public class OverviewController {
         specPower.setText("Power: " + v.getHorsepower());
         specFuel.setText("Fuel economy: " + v.getFuelEconomy());
         String seats = "Seats: " + v.getSeats();
-        if (v instanceof Car) seats += "  •  Doors: " + ((Car) v).getDoors();   // downcast: only cars have doors
+        if (v instanceof Car) seats += "  •  Doors: " + ((Car) v).getDoors();
         specSeats.setText(seats);
         specBase.setText("Base rate: " + UiUtil.peso(v.getDailyRate()) + " / day");
         specInsurance.setText("Insurance: " + UiUtil.peso(v.getInsuranceFeePerDay()) + " / day");
@@ -314,7 +310,6 @@ public class OverviewController {
         toggleLabel1.setText(show ? "▲ Hide Specifications" : "▼ Show Specifications");
     }
 
-    // ------------------------------------------------------------------ Rent Now
     @FXML
     private void handleRentNow() {
         if (selectedVehicle == null) {
@@ -376,7 +371,7 @@ public class OverviewController {
                         contactField.getText(), startPicker.getValue(), duration);
             } catch (IllegalArgumentException | IllegalStateException ex) {
                 UiUtil.showError(ex.getMessage());
-                event.consume();   // keeps the dialog open so the user can fix the input
+                event.consume();
             }
         });
 

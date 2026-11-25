@@ -3,11 +3,6 @@ package com.example.carrental.model;
 import java.time.LocalDate;
 import java.util.regex.Pattern;
 
-/**
- * ABSTRACTION: a rental has a plan (daily / weekly / monthly) and each plan computes
- * its total differently. POLYMORPHISM: List<Rental> holds all three kinds and
- * computeTotal() behaves differently per object.
- */
 public abstract class Rental {
     private static final Pattern CONTACT = Pattern.compile("^(09\\d{9}|\\+639\\d{9})$");
 
@@ -31,7 +26,6 @@ public abstract class Rental {
         this.duration = checkDuration(duration);
     }
 
-    // ---- abstract: each plan answers differently ----
     public abstract double computeTotal();
     public abstract String getRentalType();
     public abstract int getUnitDays();
@@ -40,7 +34,6 @@ public abstract class Rental {
         return vehicle.getTotalDailyCost();
     }
 
-    /** Validates everything first, then assigns, so a bad value never half-updates the rental. */
     public void update(String customerName, String contact, int duration) {
         String c = Check.text(customerName, "Customer name");
         String k = checkContact(contact);

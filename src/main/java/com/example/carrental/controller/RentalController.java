@@ -19,7 +19,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
-/** Read / update / return / delete rentals. */
 public class RentalController {
 
     @FXML private Label summaryLabel;
@@ -47,7 +46,6 @@ public class RentalController {
         colStart.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getStartDate().toString()));
         colEnd.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getEndDate().toString()));
         colDuration.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getDurationLabel()));
-        // computeTotal() is overridden in Daily/Weekly/MonthlyRental, so each row uses its own formula
         colTotal.setCellValueFactory(c -> new SimpleStringProperty(UiUtil.peso(c.getValue().computeTotal())));
         colStatus.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getStatus()));
 

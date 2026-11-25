@@ -26,7 +26,6 @@ public class SignInController {
 
     @FXML private TextField usernameField;
     @FXML private PasswordField passwordField;
-    @FXML private RadioButton customerRadio;
     @FXML private RadioButton adminRadio;
     @FXML private ToggleGroup userTypeGroup;
 

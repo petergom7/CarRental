@@ -5,7 +5,6 @@ import com.example.carrental.model.*;
 import java.time.LocalDate;
 import java.util.List;
 
-/** Builds the right Rental subclass from the plan chosen in the UI. */
 public final class RentalFactory {
     public static final List<String> PLANS = List.of("Daily", "Weekly", "Monthly");
 

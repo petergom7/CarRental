@@ -12,10 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-/**
- * All the app's business logic lives here, NOT in the controllers.
- * Data is kept in two ArrayLists (mixed subclasses) and auto-saved to CSV after every change.
- */
 public class RentalService {
     private static final Path DATA_DIR = Paths.get("data");
     private static final Path VEHICLE_FILE = DATA_DIR.resolve("vehicles.csv");
@@ -28,8 +24,8 @@ public class RentalService {
         return instance;
     }
 
-    private final ArrayList<Vehicle> vehicles = new ArrayList<>();   // holds Sedan, SUV, Van, ...
-    private final ArrayList<Rental> rentals = new ArrayList<>();     // holds Daily/Weekly/MonthlyRental
+    private final ArrayList<Vehicle> vehicles = new ArrayList<>();
+    private final ArrayList<Rental> rentals = new ArrayList<>();
     private final List<Runnable> listeners = new ArrayList<>();
     private int nextRentalId = 1;
 
@@ -42,8 +38,6 @@ public class RentalService {
         }
     }
 
-    // ------------------------------------------------------------------ change listeners
-    /** Controllers register here so every screen refreshes when data changes. */
     public void addListener(Runnable listener) {
         listeners.add(listener);
     }
@@ -53,7 +47,6 @@ public class RentalService {
         for (Runnable r : new ArrayList<>(listeners)) r.run();
     }
 
-    // ------------------------------------------------------------------ READ
     public List<Vehicle> getAllVehicles() { return new ArrayList<>(vehicles); }
 
     public List<Vehicle> getAvailableCars() {
@@ -64,7 +57,6 @@ public class RentalService {
 
     public List<Rental> getRentals() { return new ArrayList<>(rentals); }
 
-    /** Empty brand/type sets mean "no filter". */
     public List<Vehicle> search(String query, Set<String> brands, Set<String> types, boolean availableOnly) {
         String q = query == null ? "" : query.trim().toLowerCase();
         List<Vehicle> result = new ArrayList<>();
@@ -80,7 +72,6 @@ public class RentalService {
         return result;
     }
 
-    // ------------------------------------------------------------------ CREATE / UPDATE / DELETE: vehicles
     public void addVehicle(Vehicle v) {
         if (v == null) throw new IllegalArgumentException("No vehicle to add.");
         checkDuplicateName(v.getName(), null);
@@ -88,11 +79,9 @@ public class RentalService {
         notifyChanges();
     }
 
-    /** Edits in place. The type can't change (that would need a different subclass). */
     public void updateVehicle(Vehicle target, String name, String brand, String transmission,
                               double dailyRate, String horsepower, String fuelEconomy) {
         if (target == null || !vehicles.contains(target)) throw new IllegalArgumentException("Select a vehicle first.");
-        // Build a throw-away copy first: if any value is invalid it throws BEFORE we touch the real one.
         Vehicle probe = VehicleFactory.create(target.getType(), name, brand, transmission, dailyRate,
                 target.getRating(), target.getReviewCount(), horsepower, fuelEconomy);
         checkDuplicateName(probe.getName(), target);
@@ -130,7 +119,6 @@ public class RentalService {
         }
     }
 
-    // ------------------------------------------------------------------ CREATE / UPDATE / DELETE: rentals
     public Rental createRental(Vehicle vehicle, String plan, String customer, String contact,
                                LocalDate start, int duration) {
         if (vehicle == null) throw new IllegalArgumentException("Please select a car to rent.");
@@ -169,7 +157,6 @@ public class RentalService {
         notifyChanges();
     }
 
-    // ------------------------------------------------------------------ summary + price quote
     public double getAverageRating() {
         if (vehicles.isEmpty()) return 0;
         double sum = 0;
@@ -183,19 +170,16 @@ public class RentalService {
         return count;
     }
 
-    /** Polymorphism in action: computeTotal() runs a different formula per rental subclass. */
     public double getTotalBooked() {
         double total = 0;
         for (Rental r : rentals) total += r.computeTotal();
         return total;
     }
 
-    /** Price for `duration` units of `plan` (1 day / 1 week / 1 month each). Nothing is saved. */
     public double quote(Vehicle vehicle, String plan, int duration) {
         return RentalFactory.create(0, plan, vehicle, "Quote", "09000000000", LocalDate.now(), duration).computeTotal();
     }
 
-    // ------------------------------------------------------------------ CSV save / load
     private void save() {
         try {
             Files.createDirectories(DATA_DIR);

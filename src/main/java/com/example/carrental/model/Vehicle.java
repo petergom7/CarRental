@@ -1,10 +1,5 @@
 package com.example.carrental.model;
 
-/**
- * ABSTRACTION: the root of the vehicle hierarchy. You can't do "new Vehicle()";
- * you must pick a real kind (Sedan, Van, Motorcycle...).
- * ENCAPSULATION: every field is private and every setter validates.
- */
 public abstract class Vehicle {
     private String name;
     private String brand;
@@ -29,17 +24,14 @@ public abstract class Vehicle {
         setFuelEconomy(fuelEconomy);
     }
 
-    // ---- abstract: every subclass MUST answer these (POLYMORPHISM happens here) ----
     public abstract String getType();
     public abstract double getInsuranceFeePerDay();
     public abstract int getSeats();
 
-    /** Base rate + this vehicle type's insurance. Calls the overridden insurance method. */
     public double getTotalDailyCost() {
         return dailyRate + getInsuranceFeePerDay();
     }
 
-    // ---- getters ----
     public String getName() { return name; }
     public String getBrand() { return brand; }
     public String getTransmission() { return transmission; }
@@ -51,7 +43,6 @@ public abstract class Vehicle {
     public boolean isAvailable() { return available; }
     public boolean isFavorite() { return favorite; }
 
-    // ---- setters with validation ----
     public void setName(String name) { this.name = Check.text(name, "Vehicle name"); }
     public void setBrand(String brand) { this.brand = Check.text(brand, "Brand"); }
 

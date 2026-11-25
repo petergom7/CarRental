@@ -1,6 +1,5 @@
 package com.example.carrental.model;
 
-/** Small validation helpers shared by the model classes (package-private on purpose). */
 final class Check {
     private Check() {}
 
