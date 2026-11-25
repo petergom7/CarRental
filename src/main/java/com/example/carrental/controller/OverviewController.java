@@ -211,14 +211,7 @@ public class OverviewController {
         Label rating = new Label(String.format("⭐ %.1f (%d)", v.getRating(), v.getReviewCount()));
         rating.setStyle("-fx-font-size: 11px; -fx-text-fill: #e6a800;");
 
-        Label heart = new Label(v.isFavorite() ? "❤" : "♡");
-        heart.setStyle("-fx-font-size: 16px; -fx-cursor: hand;");
-        heart.setOnMouseClicked(e -> {
-            service.setFavorite(v, !v.isFavorite());
-            e.consume();
-        });
-
-        HBox top = new HBox(new VBox(name, rating), spacer(), heart);
+        HBox top = new HBox(new VBox(name, rating), spacer());
         top.setAlignment(Pos.CENTER_LEFT);
 
         StackPane image = new StackPane();
@@ -287,7 +280,7 @@ public class OverviewController {
         specPower.setText("Power: " + v.getHorsepower());
         specFuel.setText("Fuel economy: " + v.getFuelEconomy());
         String seats = "Seats: " + v.getSeats();
-        if (v instanceof Car) seats += "  •  Doors: " + ((Car) v).getDoors();   // downcast: only cars have doors
+        if (v instanceof Car) seats += "  •  Doors: " + ((Car) v).getDoors();
         specSeats.setText(seats);
         specBase.setText("Base rate: " + UiUtil.peso(v.getDailyRate()) + " / day");
         specInsurance.setText("Insurance: " + UiUtil.peso(v.getInsuranceFeePerDay()) + " / day");
@@ -368,7 +361,7 @@ public class OverviewController {
                         contactField.getText(), startPicker.getValue(), duration);
             } catch (IllegalArgumentException | IllegalStateException ex) {
                 UiUtil.showError(ex.getMessage());
-                event.consume();   // keeps the dialog open so the user can fix the input
+                event.consume();
             }
         });
 

@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import java.io.InputStream;
 import java.util.Locale;
 
-/** Small UI helpers: alerts, peso formatting, friendly number parsing, car images. */
 public final class UiUtil {
     private UiUtil() {}
 
