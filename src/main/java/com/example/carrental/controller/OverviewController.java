@@ -1,8 +1,5 @@
 package com.example.carrental.controller;
 
-
-import javafx.fxml.FXMLLoader;
-import java.io.IOException;
 import com.example.carrental.model.Car;
 import com.example.carrental.model.Rental;
 import com.example.carrental.model.Vehicle;
@@ -94,7 +91,6 @@ public class OverviewController {
         refresh();
     }
 
-    // ------------------------------------------------------------------ refresh / filters
     private void refresh() {
         rebuildBrandFilters();
         applyFilters();
@@ -166,7 +162,6 @@ public class OverviewController {
         stylePlanButtonsAndRefresh();
     }
 
-    // ------------------------------------------------------------------ rental plan buttons
     @FXML private void handleDaily() { setPlan("Daily"); }
     @FXML private void handleWeekly() { setPlan("Weekly"); }
     @FXML private void handleMonthly() { setPlan("Monthly"); }
@@ -203,7 +198,6 @@ public class OverviewController {
         }
     }
 
-    // ------------------------------------------------------------------ car cards
     private VBox buildCard(Vehicle v) {
         String base = "-fx-background-color: white; -fx-background-radius: 16; -fx-padding: 15; -fx-cursor: hand;";
         String selected = "-fx-border-color: #111111; -fx-border-width: 2; -fx-border-radius: 16;";
@@ -268,7 +262,6 @@ public class OverviewController {
     }
 
 
-    // ------------------------------------------------------------------ details panel
     private void showDetails(Vehicle v) {
         boolean has = v != null;
         detailContent.setVisible(has);
@@ -314,7 +307,6 @@ public class OverviewController {
         toggleLabel1.setText(show ? "▲ Hide Specifications" : "▼ Show Specifications");
     }
 
-    // ------------------------------------------------------------------ Rent Now
     @FXML
     private void handleRentNow() {
         if (selectedVehicle == null) {
